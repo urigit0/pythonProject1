@@ -31,20 +31,14 @@ clock = pygame.time.Clock()
 def your_score(score):
     value = score_font.render("Your Score: " + str(score), True, yellow)
     dis.blit(value, [0, 0])
-
-
 # ------------------------ОТРИСОВКА змеи
 def our_snake(s_block, snake_list):
     for x in snake_list:
         pygame.draw.rect(dis, black, [x[0], x[1], s_block, snake_block])
-
-
 # ------------------------СООБЩЕНИЕ
 def message(msg, color):
     mesg = font_style.render(msg, True, color)
     dis.blit(mesg, [dis_width / 6, dis_height / 3])
-
-
 
 def game_loop(flag_info, snake_list_buff, snake_food, snake_direct):
     game_over = False
@@ -56,7 +50,7 @@ def game_loop(flag_info, snake_list_buff, snake_food, snake_direct):
     x1_change = 0
     y1_change = 0
 
-    snake_list = []  # лист с координатами всех блоков змейки
+    snake_list = []         # лист с координатами всех блоков змейки
     length_of_snake = 1
 
     foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
@@ -78,9 +72,11 @@ def game_loop(flag_info, snake_list_buff, snake_food, snake_direct):
                         game_close = False
 
                     if event.key == pygame.K_c:
-                         game_loop()
+                         # game_loop()
+                         game_over = True
+                         game_close = False
         # *********************************обработка клавиатуры
-        if snake_direct == 0:
+        if snake_direct[0] == 0:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     game_over = True
@@ -99,20 +95,20 @@ def game_loop(flag_info, snake_list_buff, snake_food, snake_direct):
                         x1_change = 0
         # обработка управляющей переменной
         else:
-            if snake_direct == 1:
+            if snake_direct[0] == 1:
                 x1_change = -snake_block
                 y1_change = 0
-            if snake_direct == 2:
+            if snake_direct[0] == 2:
                 x1_change = snake_block
                 y1_change = 0
-            if snake_direct == 4:
+            if snake_direct[0] == 4:
                 y1_change = -snake_block
                 x1_change = 0
-            if snake_direct == 8:
+            if snake_direct[0] == 8:
                 y1_change = snake_block
                 x1_change = 0
 
-        snake_direct = 0
+        snake_direct[0] = 0
         # проверка столкновений со стеной
         if x1 >= dis_width or x1 < 0 or y1 >= dis_height or y1 < 0:
             game_close = True
