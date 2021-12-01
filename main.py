@@ -1,4 +1,7 @@
 import driver_snake
 
-driver_snake.start()
-#second
+
+# second
+
+if __name__ == "__main__":
+    driver_snake.start()
